@@ -1,0 +1,12 @@
+node_modules
+ocr-model
+trocr-algerian-medical
+trocr-algerian-medical-final
+trocr-algerian-medical-onnx
+fine-tuning
+temp
+dist
+*.log
+*.jsonl
+.env
+.env.local

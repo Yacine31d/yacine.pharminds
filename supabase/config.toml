@@ -1,0 +1,11 @@
+# Replace with your own Supabase project ID
+project_id = "bwtgavgdwihqdlbpystw"
+
+[functions.ai-chat]
+verify_jwt = false
+
+[functions.scan-prescription]
+verify_jwt = false
+
+[functions.create-notification]
+verify_jwt = true

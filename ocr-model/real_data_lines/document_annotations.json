@@ -1,0 +1,275 @@
+[
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (2).jpeg",
+    "doctor_specialty": "Médecine Générale",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "e prof",
+        "dosage": "400",
+        "frequency": "1 c / 8h 3j",
+        "quantity": ""
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (3).jpeg",
+    "doctor_specialty": "Médecine Générale",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Amoclan BD",
+        "dosage": "1g",
+        "frequency": "1 cp x 3 / j",
+        "quantity": ""
+      },
+      {
+        "name": "Zomax",
+        "dosage": "sirop",
+        "frequency": "1 c a m <unk>",
+        "quantity": ""
+      },
+      {
+        "name": "Bronchocal",
+        "dosage": "sirop",
+        "frequency": "1 c a s <unk>",
+        "quantity": ""
+      },
+      {
+        "name": "vit <unk>",
+        "dosage": "",
+        "frequency": "on <unk>",
+        "quantity": ""
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (4).jpeg",
+    "doctor_specialty": "Médecine Générale",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "G<unk>l",
+        "dosage": "300",
+        "frequency": "1 2 1",
+        "duration": "3 mois"
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM.jpeg",
+    "doctor_specialty": "Praticien Principal",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "MARi Lon",
+        "dosage": "cp",
+        "frequency": "1 cp / j",
+        "duration": "03 mois"
+      },
+      {
+        "name": "Am o clan",
+        "dosage": "1g",
+        "frequency": "1 cp 3 x / j",
+        "quantity": "04 boites"
+      },
+      {
+        "name": "<unk>",
+        "dosage": "600 mg",
+        "frequency": "1 cp 2 x / j",
+        "quantity": "02 bte"
+      },
+      {
+        "name": "Pomoc gel",
+        "dosage": "20 mg",
+        "frequency": "1 gel le matin",
+        "quantity": "02 bte"
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (5).jpeg",
+    "doctor_specialty": "Médecine Générale",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Sulpiride",
+        "dosage": "50",
+        "frequency": "1 gel x 3",
+        "quantity": "1"
+      },
+      {
+        "name": "Vitamag",
+        "dosage": "Amp",
+        "frequency": "1 amp <unk>",
+        "quantity": "1"
+      },
+      {
+        "name": "Detensiel",
+        "dosage": "",
+        "frequency": "1 c <unk>",
+        "quantity": "1"
+      },
+      {
+        "name": "Bebaline",
+        "dosage": "",
+        "frequency": "1 gel x 3 le soir",
+        "quantity": "4 bte"
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.49 AM (1).jpeg",
+    "doctor_specialty": "Pediatrie",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Doliprane",
+        "dosage": "7,5 ml",
+        "frequency": "x 2",
+        "quantity": "1 flacon"
+      },
+      {
+        "name": "Flagyl 125",
+        "dosage": "7,5 ml",
+        "frequency": "x 3",
+        "quantity": "1 flacon"
+      },
+      {
+        "name": "Smecta",
+        "dosage": "1 sachet",
+        "frequency": "x 2",
+        "quantity": "1 boite"
+      },
+      {
+        "name": "Bronchocal",
+        "dosage": "7.5 ml",
+        "frequency": "x 3",
+        "quantity": "1 flacon"
+      },
+      {
+        "name": "Vit D3 200 000",
+        "dosage": "1 ampoule",
+        "frequency": "",
+        "quantity": ""
+      },
+      {
+        "name": "FERRUM",
+        "dosage": "20 gouttes",
+        "frequency": "x 2",
+        "quantity": "1 flacon"
+      },
+      {
+        "name": "Sapsakof 300",
+        "dosage": "1 c a c",
+        "frequency": "x 4",
+        "quantity": ""
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.49 AM (2).jpeg",
+    "doctor_specialty": "Cardiologie",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Triatec",
+        "dosage": "cp 5mg",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Crestor",
+        "dosage": "cp 10mg",
+        "frequency": "1/j",
+        "duration": "3 mois"
+      },
+      {
+        "name": "Motilium",
+        "dosage": "cp 10",
+        "frequency": "1 cp 1/4 h Avant les Repas 2x/j",
+        "duration": ""
+      },
+      {
+        "name": "Antar",
+        "dosage": "cp 20",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Gaviscon",
+        "dosage": "sachet",
+        "frequency": "1 sachet Après les repas",
+        "duration": "3/j"
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (6).jpeg",
+    "doctor_specialty": "Hemodialyse / Maladies des Reins",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Hytacand",
+        "dosage": "16/12.5",
+        "frequency": "1/j",
+        "duration": "03 mois"
+      },
+      {
+        "name": "Novofamine",
+        "dosage": "85",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Levothyrox",
+        "dosage": "",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Bipreterax",
+        "dosage": "50",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Lipanthyl",
+        "dosage": "145",
+        "frequency": "1/j",
+        "duration": ""
+      },
+      {
+        "name": "Aspegic",
+        "dosage": "100",
+        "frequency": "1/j",
+        "duration": ""
+      }
+    ]
+  },
+  {
+    "image_id": "WhatsApp Image 2026-04-06 at 11.36.48 AM (8).jpeg",
+    "doctor_specialty": "Chirurgie Dentaire",
+    "patient_name": "[REDACTED]",
+    "medications": [
+      {
+        "name": "Birodogyl",
+        "dosage": "(cp)",
+        "frequency": "02 cp 02 f / j",
+        "quantity": "03 bte"
+      },
+      {
+        "name": "Ibuprofene",
+        "dosage": "200 mg (cp)",
+        "frequency": "01 cp 02 f / j",
+        "quantity": "01 bte"
+      },
+      {
+        "name": "Doliprane",
+        "dosage": "",
+        "frequency": "01 cp 02 f / j",
+        "quantity": "01 bte"
+      }
+    ]
+  }
+]

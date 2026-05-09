@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables (secrets - never commit these!)
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.vercel
+
+# Large ML model directories (uploaded to HuggingFace, not git)
+trocr-algerian-medical/
+trocr-algerian-medical-final/
+trocr-algerian-medical-onnx/
+ocr-model/trocr-algerian-medical-final/
+
+# Training / active-learning data
+fine-tuning/
+ocr-model/dataset/
+ocr-model/temp/
+temp/
+*.jsonl
+ocr-model/training_live.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.pyo

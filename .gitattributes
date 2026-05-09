@@ -1,0 +1,25 @@
+# Auto-detect text files and enforce LF on checkout
+* text=auto eol=lf
+
+# Windows batch files use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files - no line ending conversion
+*.ttf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.safetensors binary
+*.onnx binary
+*.pt binary
+*.pth binary
