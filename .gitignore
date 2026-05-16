@@ -38,7 +38,7 @@ ocr-model/trocr-algerian-medical-final/
 
 # Training / active-learning data
 fine-tuning/
-ocr-model/dataset/
+# ocr-model/dataset/  # Commented out so dataset files can be pushed
 ocr-model/dataset.PRE_CLEANUP_BACKUP/
 ocr-model/eval_results/
 ocr-model/checkpoints/
