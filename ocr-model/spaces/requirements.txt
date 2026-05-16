@@ -1,0 +1,14 @@
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+Pillow>=10.3.0
+torch>=2.2.0
+transformers>=4.40.0
+optimum[onnxruntime]>=1.19.0
+huggingface_hub>=0.22.0
+opencv-python-headless>=4.9.0
+numpy>=1.26.0
+# v2 post-processing + structured response
+pydantic>=2.5.0
+rapidfuzz>=3.6.0
+phonetics>=1.0.5

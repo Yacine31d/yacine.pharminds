@@ -1,0 +1,43 @@
+name: Warm OCR Space
+
+# Pings the HF Space every 9 minutes so it doesn't go to sleep (which would
+# add ~30s cold-start latency for the next user). Also captures lightweight
+# health metrics in the workflow logs for thesis-defense diagnostics.
+#
+# GitHub Actions free tier on public repos allows cron — minimum interval 5 min.
+# Note: scheduled workflows can occasionally be skipped during platform-wide
+# low usage; that's acceptable for our SLO (one missed warm = one cold start).
+
+on:
+  schedule:
+    - cron: '*/9 * * * *'    # every 9 minutes
+  workflow_dispatch:          # allow manual run from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Hit /v2/health
+        run: |
+          set -e
+          URL="https://abdou-19-pharminds-ocr-api.hf.space/v2/health"
+          echo "→ GET $URL"
+          response=$(curl -sS -w "\n%{http_code}\n%{time_total}s" -m 60 "$URL" || true)
+          body=$(echo "$response" | head -n -2)
+          status=$(echo "$response" | tail -n 2 | head -n 1)
+          dur=$(echo "$response" | tail -n 1)
+          echo "HTTP $status in $dur"
+          echo "Body: $body"
+          # Don't fail the workflow on transient HF errors — the next 9-min
+          # tick will retry. We only fail if status code is missing entirely.
+          if [ -z "$status" ]; then
+            echo "::error::No response from HF Space"
+            exit 1
+          fi
+
+      - name: Hit /v2/metrics (best-effort)
+        continue-on-error: true
+        run: |
+          curl -sS -m 30 https://abdou-19-pharminds-ocr-api.hf.space/v2/metrics \
+            | python3 -m json.tool || true

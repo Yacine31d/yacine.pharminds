@@ -1,0 +1,261 @@
+{
+  "project": {
+    "name": "PharMinds Algeria",
+    "type": "PFE (Projet de Fin d'Etudes) — Final Year University Project",
+    "author": "Renouni Abderrahmane",
+    "email": "abdorenouni@gmail.com",
+    "version": "1.0.0",
+    "description": "An AI-powered pharmacy management platform for Algeria. Features role-based dashboards (Admin, Pharmacist, Patient), AI prescription scanning using a custom-trained TrOCR OCR model, an AI medical chat assistant, and integration with Supabase for backend/auth.",
+    "language": "French (UI) / English (code)",
+    "target_country": "Algeria"
+  },
+
+  "tech_stack": {
+    "frontend": {
+      "framework": "React 18 + TypeScript",
+      "build_tool": "Vite 5.4",
+      "styling": "TailwindCSS 3.4 + shadcn/ui (Radix primitives)",
+      "state_management": "TanStack React Query + React Context",
+      "routing": "React Router DOM v6",
+      "animations": "Framer Motion",
+      "charts": "Recharts",
+      "icons": "Lucide React",
+      "forms": "React Hook Form + Zod validation"
+    },
+    "backend": {
+      "auth_and_database": "Supabase (PostgreSQL + Auth + Edge Functions)",
+      "supabase_project_id": "bwtgavgdwihqdlbpystw",
+      "supabase_url": "https://bwtgavgdwihqdlbpystw.supabase.co"
+    },
+    "ai_services": {
+      "local_ocr": {
+        "description": "Custom TrOCR model served via FastAPI on localhost:8001",
+        "model": "microsoft/trocr-small-handwritten (base, fine-tuned for Algerian prescriptions)",
+        "detection": "EasyOCR (CRAFT-based text detection)",
+        "server_file": "ocr-model/serve.py",
+        "pipeline_file": "ocr-model/pipeline.py",
+        "port": 8001
+      },
+      "ai_chat_and_structuring": {
+        "tier_1_private_brain": "Optional Google Colab LLM endpoint (VITE_CUSTOM_AI_URL)",
+        "tier_2_arcee": "Arcee AI trinity-mini model (VITE_ARCEE_API_KEY)",
+        "tier_3_openrouter": "OpenRouter API — Llama 3.3 70B for chat, Llama 4 Maverick for vision",
+        "priority_order": "Private Brain > Arcee > OpenRouter",
+        "service_file": "src/lib/ai-service.ts"
+      }
+    },
+    "ocr_training": {
+      "model_architecture": "TrOCR (Vision Encoder-Decoder) — microsoft/trocr-small-handwritten",
+      "training_script": "ocr-model/train_trocr.py",
+      "dataset_generator": "ocr-model/generate_dataset.py",
+      "gpu": "NVIDIA RTX 3050 (4GB VRAM)",
+      "training_params": {
+        "batch_size": 4,
+        "gradient_accumulation": 4,
+        "fp16": true,
+        "gradient_checkpointing": true,
+        "learning_rate": 5e-5,
+        "epochs": 10
+      }
+    }
+  },
+
+  "architecture": {
+    "prescription_scanning_pipeline": {
+      "description": "Hybrid 2-stage pipeline for prescription OCR",
+      "stage_1_local_ocr": {
+        "step_1": "User uploads prescription image in PrescriptionScanner.tsx",
+        "step_2": "Image optionally preprocessed (contrast, rotation) via ImagePreprocessor.tsx",
+        "step_3": "Image sent to local FastAPI server (localhost:8001/scan) via Vite proxy (/ocr-api)",
+        "step_4": "EasyOCR CRAFT detects text line bounding boxes",
+        "step_5": "Each cropped line is fed to TrOCR for text recognition",
+        "step_6": "Basic regex extracts doctor name and medications from raw lines",
+        "step_7": "Returns raw_ocr lines + extracted_data + base64 line_crops for feedback"
+      },
+      "stage_2_ai_structuring": {
+        "step_1": "Raw OCR text lines are sent to AI Brain (Arcee/OpenRouter) via structureTextWithAI()",
+        "step_2": "AI returns structured JSON: doctor_name, prescription_date, medications[]",
+        "step_3": "Structured result overwrites raw regex extraction for better accuracy"
+      },
+      "active_learning_feedback": {
+        "description": "After scanning, the UI shows each cropped text line with predicted text. User can correct mistakes and submit to POST /feedback, which saves the corrected image+text directly into the training dataset for future fine-tuning."
+      }
+    },
+
+    "ai_chat_pipeline": {
+      "description": "Streaming AI chat assistant for medical questions",
+      "component": "src/components/chat/AIChatWidget.tsx",
+      "function": "streamChat() in ai-service.ts",
+      "system_prompt": "Bilingual medical assistant (French/Arabic) specialized in Algerian pharmacy"
+    }
+  },
+
+  "folder_structure": {
+    "root": "c:/Users/abdou/Downloads/pfeproject/pharminds-algeria-main/",
+    "key_files": {
+      "src/App.tsx": "Main router — defines all routes with ProtectedRoute wrappers",
+      "src/lib/ai-service.ts": "Central AI service — handles OCR, chat, vision, provider fallback",
+      "src/integrations/supabase/client.ts": "Supabase client initialization",
+      "src/contexts/AuthContext.tsx": "Authentication context with role-based access (admin/pharmacist/patient)",
+      "src/contexts/LanguageContext.tsx": "i18n context for French/English/Arabic",
+      "vite.config.ts": "Vite config with proxies: /ocr-api -> localhost:8001, /supabase-api -> supabase",
+      ".env": "Environment variables (Supabase keys, AI API keys)"
+    },
+    "frontend_pages": {
+      "src/pages/Index.tsx": "Landing page",
+      "src/pages/Auth.tsx": "Login/Register page",
+      "src/pages/PharmacistDashboard.tsx": "Pharmacist main dashboard",
+      "src/pages/pharmacist/PharmacistInventory.tsx": "Inventory management",
+      "src/pages/pharmacist/PharmacistAlerts.tsx": "Stock alerts and notifications",
+      "src/pages/pharmacist/PharmacistPatients.tsx": "Patient management",
+      "src/pages/pharmacist/PharmacistAnalytics.tsx": "Analytics and reporting (includes PrescriptionScanner)",
+      "src/pages/pharmacist/PharmacistSettings.tsx": "Settings page",
+      "src/pages/patient/PatientDashboard.tsx": "Patient main dashboard",
+      "src/pages/patient/Ordonnances.tsx": "Patient prescriptions (includes PrescriptionScanner)",
+      "src/pages/patient/CarteChifa.tsx": "Algerian health insurance card (Carte Chifa)",
+      "src/pages/patient/PatientMedications.tsx": "Patient medication tracker",
+      "src/pages/patient/PatientAssistant.tsx": "AI medical chat assistant",
+      "src/pages/patient/PatientProfile.tsx": "Patient profile page",
+      "src/pages/AdminDashboard.tsx": "Admin main dashboard",
+      "src/pages/admin/AdminUserManagement.tsx": "User management",
+      "src/pages/admin/AdminDrugManagement.tsx": "Drug database management",
+      "src/pages/admin/AdminAIHealth.tsx": "AI system health monitoring",
+      "src/pages/admin/AdminSecurity.tsx": "Security settings",
+      "src/pages/admin/AdminAnalytics.tsx": "Platform analytics",
+      "src/pages/admin/AdminCompliance.tsx": "Regulatory compliance",
+      "src/pages/admin/AdminSettings.tsx": "Admin settings"
+    },
+    "key_components": {
+      "src/components/pharmacist/PrescriptionScanner.tsx": "Main prescription scanning UI with image upload, OCR results display, and active learning feedback",
+      "src/components/pharmacist/ImagePreprocessor.tsx": "Image preprocessing (contrast, brightness, rotation) before OCR",
+      "src/components/pharmacist/InteractionAlert.tsx": "Drug interaction warning system",
+      "src/components/chat/AIChatWidget.tsx": "Floating AI chat widget",
+      "src/components/ProtectedRoute.tsx": "Route guard checking auth + role",
+      "src/components/landing/": "Landing page sections (HeroSection, StatsSection, ModulesSection, etc.)"
+    },
+    "ocr_model_directory": {
+      "ocr-model/serve.py": "FastAPI server — endpoints: POST /scan, GET /health, POST /feedback",
+      "ocr-model/pipeline.py": "PrescriptionOCR class — CRAFT detection + TrOCR recognition + regex extraction",
+      "ocr-model/train_trocr.py": "Training script — PrescriptionDataset class + Seq2SeqTrainer",
+      "ocr-model/generate_dataset.py": "Synthetic data generator — creates printed + handwritten line images",
+      "ocr-model/extract_real_lines.py": "Extracts text line crops from raw prescription photos using OpenCV",
+      "ocr-model/auto_annotate.py": "Uses Gemini API to auto-label cropped line images",
+      "ocr-model/merge_feedback.py": "Merges user feedback data into the main training labels.csv",
+      "ocr-model/monitor_training.py": "Live training progress monitor (reads training_live.json)",
+      "ocr-model/cleanup_dataset.py": "Dataset cleanup — removes duplicates, fixes mislabeled data",
+      "ocr-model/regenerate_handwritten.py": "Regenerates handwritten samples with real handwriting fonts",
+      "ocr-model/dataset/labels.csv": "Main training labels — 9373 rows (6373 printed + 3000 handwritten)",
+      "ocr-model/dataset/images/": "Training images directory",
+      "ocr-model/fonts/": "Handwriting fonts (Caveat, DancingScript, IndieFlower, Kalam, PatrickHand)",
+      "ocr-model/real_data_lines/": "Cropped lines from real prescription photos + annotations",
+      "ocr-model/real_data_raw/": "Original raw prescription photos",
+      "ocr-model/.env": "Gemini API key for auto-annotation"
+    },
+    "supabase_directory": {
+      "supabase/config.toml": "Local Supabase CLI config",
+      "supabase/set_admin.sql": "SQL to set admin role for abdorenouni@gmail.com",
+      "supabase/functions/": "Edge Functions (ai-chat for Gemini fallback)",
+      "supabase/migrations/": "Database migration files"
+    }
+  },
+
+  "environment_variables": {
+    ".env (root)": {
+      "VITE_SUPABASE_PROJECT_ID": "bwtgavgdwihqdlbpystw",
+      "VITE_SUPABASE_URL": "https://bwtgavgdwihqdlbpystw.supabase.co",
+      "VITE_SUPABASE_ANON_KEY": "sb_publishable_mNMXNMRIiY2eApYvtieM4w_FnQl246O",
+      "VITE_ARCEE_API_KEY": "rca_79275aa4b3ce497bb5dbdfcc986360b1",
+      "VITE_ARCEE_MODEL": "trinity-mini",
+      "VITE_OPENROUTER_API_KEY": "(empty — optional)",
+      "VITE_CUSTOM_AI_URL": "(empty — optional Colab endpoint)"
+    },
+    ".env (ocr-model/)": {
+      "GEMINI_API_KEY": "Used by auto_annotate.py for batch labeling"
+    }
+  },
+
+  "user_roles": {
+    "admin": {
+      "email": "abdorenouni@gmail.com (hardcoded in set_admin.sql)",
+      "capabilities": ["User management", "Drug database CRUD", "Platform analytics", "AI health monitoring", "Security settings"]
+    },
+    "pharmacist": {
+      "capabilities": ["Inventory management", "Prescription scanning (OCR)", "Patient management", "Stock alerts", "Analytics"]
+    },
+    "patient": {
+      "capabilities": ["View prescriptions", "Scan prescriptions (OCR)", "AI medical assistant chat", "Carte Chifa management", "Medication tracking"]
+    }
+  },
+
+  "running_the_project": {
+    "frontend": {
+      "install": "npm install",
+      "dev_server": "npm run dev",
+      "url": "http://localhost:5173",
+      "build": "npm run build"
+    },
+    "ocr_backend": {
+      "install": "pip install -r ocr-model/requirements.txt",
+      "start": "python ocr-model/serve.py",
+      "url": "http://localhost:8001",
+      "health_check": "GET http://localhost:8001/health"
+    },
+    "training": {
+      "generate_data": "python ocr-model/generate_dataset.py",
+      "train": "python ocr-model/train_trocr.py --epochs 10",
+      "merge_feedback": "python ocr-model/merge_feedback.py"
+    }
+  },
+
+  "known_issues_and_fixes": {
+    "torch_version_compatibility": {
+      "issue": "torch 2.7.1+cu118 version string breaks transformers' is_torch_greater_or_equal() check, causing check_torch_load_is_safe() to reject model loading",
+      "fix": "Monkey-patched in pipeline.py: torch.load patched for EasyOCR, and transformers.modeling_utils.check_torch_load_is_safe set to lambda:None",
+      "affected_files": ["ocr-model/pipeline.py"]
+    },
+    "windows_encoding": {
+      "issue": "UnicodeEncodeError when printing emojis/unicode on Windows terminal (cp1252)",
+      "fix": "os.environ['PYTHONUTF8'] = '1' set at top of serve.py"
+    },
+    "easyocr_progress_bar": {
+      "issue": "EasyOCR's download progress bar causes encoding errors on Windows",
+      "fix": "stdout temporarily redirected to devnull during model initialization in serve.py"
+    },
+    "dataset_corruption_fixed": {
+      "issue": "3000 'handwritten' images were generated with system fonts (Arial/Times) because font ZIP downloads were corrupt HTML files",
+      "fix": "Renamed to 'printed_', downloaded real handwriting fonts (Caveat, DancingScript, etc.), regenerated 3000 genuine handwritten samples"
+    }
+  },
+
+  "dataset_status": {
+    "total_samples": 9373,
+    "printed_samples": 6373,
+    "handwritten_samples": 3000,
+    "handwriting_fonts": ["Caveat-Regular.ttf", "DancingScript-Regular.ttf", "IndieFlower-Regular.ttf", "Kalam-Regular.ttf", "PatrickHand-Regular.ttf"],
+    "labels_file": "ocr-model/dataset/labels.csv",
+    "max_duplicates_per_text": 8,
+    "real_prescription_data": "9 real prescription photos in ocr-model/real_data_raw/, 167 extracted line crops in ocr-model/real_data_lines/",
+    "vocabulary": {
+      "drugs": ["Doliprane", "Augmentin", "Clamoxyl", "Amoxicilline", "Aspegic", "Voltarene", "Spasfon", "Smecta", "Efferalgan", "Maxilase", "Rhinathiol", "Fervex", "Maalox", "Gaviscon", "Flagyl", "Bronchocal", "Triatec", "Crestor", "Motilium", "Bipreterax", "Lipanthyl", "Birodogyl", "Ibuprofene", "Amoclan BD", "Zomax", "Sulpiride", "Vitamag", "Detensiel", "Bebaline", "Sapsakof 300", "Hytacand", "FERRUM", "Vit D3 200 000", "Pomoc gel", "MARi Lon", "Am o clan", "Novofamine", "Antar"],
+      "posology_patterns": ["1 cp x 3 / j", "02 cp 02 f / j", "1 c / 8h 3j", "1/j 03 mois", "1 gel le matin", "x 2", "x 3", "1 sachet Apres les repas 3/j", "7,5 ml x 2", "20 gouttes x 2"],
+      "doctor_prefixes": ["Dr.", "Docteur", "Pr.", "Professeur"],
+      "specialties": ["Medecine Generale", "Cardiologie", "Pediatrie", "Chirurgie Dentaire", "Hemodialyse / Maladies des Reins", "Praticien Principal"]
+    }
+  },
+
+  "testing_credentials": {
+    "patient_account": {
+      "email": "abdorenouni@gmail.com",
+      "password": "Arenou19",
+      "role": "patient"
+    }
+  },
+
+  "next_steps": [
+    "User will provide additional real-world prescription dataset to merge",
+    "Retrain TrOCR model with cleaned + expanded dataset",
+    "Improve regex extraction in pipeline.py for better medication parsing",
+    "Consider adding more handwriting fonts for diversity",
+    "Test active learning feedback loop end-to-end"
+  ]
+}

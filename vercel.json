@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    { "source": "/arcee-api/:path*",  "destination": "https://models.arcee.ai/:path*" },
+    { "source": "/gemini-api/:path*", "destination": "https://generativelanguage.googleapis.com/:path*" },
+    { "source": "/ocr-api/:path*",    "destination": "https://abdou-19-pharminds-ocr-api.hf.space/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options",           "value": "DENY" },
+        { "key": "X-Content-Type-Options",    "value": "nosniff" },
+        { "key": "Referrer-Policy",           "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "Permissions-Policy",        "value": "camera=(self), microphone=(), geolocation=(self), payment=(), usb=(), interest-cohort=()" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://models.arcee.ai https://abdou-19-pharminds-ocr-api.hf.space https://openrouter.ai https://api.openrouter.ai https://*.hf.space https://text.pollinations.ai https://api.groq.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+        },
+        { "key": "X-XSS-Protection",         "value": "1; mode=block" },
+        { "key": "Cross-Origin-Opener-Policy","value": "same-origin" },
+        { "key": "Cross-Origin-Resource-Policy","value": "same-origin" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install"
+}
